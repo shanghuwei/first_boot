@@ -17,5 +17,7 @@ public class Girl {
     private String cupSize;
     private Integer age;
     private String heightWeight;
+    private String hairColor;
+    private boolean open;
 
 }
