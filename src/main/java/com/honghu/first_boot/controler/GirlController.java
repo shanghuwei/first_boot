@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
 public class GirlController {
     @Autowired
@@ -16,48 +17,40 @@ public class GirlController {
     @Autowired
     private GirlSevice girlSevice;
 
-    @GetMapping("/girls")
-    public List<Girl> girlList(){
-        return  girlRepository.findAll();
-    }
-
-    @GetMapping("/girl_add")
-    public Girl girlAdd(@RequestParam("cupSize") String cupSize,
-                        @RequestParam("age") Integer age){
-        Girl girl = new Girl();
-        girl.setCupSize(cupSize);
-        girl.setAge(age);
-       return girlRepository.save(girl);
-    }
-
-    @GetMapping("/getGirl/{id}")
-    public Girl queryGirl(@PathVariable("id") Integer id){
-        return girlRepository.findOne(id);
-    }
-
-    @GetMapping("/girlUpdate/{id}")
-    public Girl updateGirl(@PathVariable("id") Integer id,
-                           @RequestParam("cupSize") String cupSize,
-                           @RequestParam("age") Integer age){
-        Girl girl = new Girl();
-        girl.setId(id);
-        girl.setAge(age);
-        girl.setCupSize(cupSize);
+    @PostMapping("/girl_add")
+    public Girl girlAdd(@RequestBody Girl girl) {
         return girlRepository.save(girl);
     }
 
-    @GetMapping("/deleteGirl/{id}")
-    public void deleteGirl(@PathVariable("id") Integer id){
-        girlRepository.delete(id);
+    @GetMapping("/getGirls")
+    public List<Girl> girlList() {
+        return girlRepository.findAll();
     }
 
-    @GetMapping("/queryGirls/{age}")
-    public List<Girl> queryGirlsByAge(@PathVariable("age") Integer age){
-        return  girlRepository.findGirlsByAge(age);
+    @GetMapping("/getGirl/{id}")
+    public Girl queryGirl(@PathVariable Integer id) {
+        return girlRepository.findOne(id);
+    }
+
+    @PutMapping("/girlUpdate")
+    public Girl updateGirl(@RequestBody Girl girl) {
+
+        return girlRepository.save(girl);
+    }
+
+    @DeleteMapping("/deleteGirl/{id}")
+    public String deleteGirl(@PathVariable Integer id) {
+        girlRepository.delete(id);
+        return "delete success id = " + id;
+    }
+
+    @GetMapping("/queryGirls")
+    public List<Girl> queryGirlsByAge(@RequestParam Integer age) {
+        return girlRepository.findGirlsByAge(age);
     }
 
     @GetMapping("/insertGirls")
-    public void insertGirls(){
+    public void insertGirls() {
         girlSevice.InsertTwo();
     }
 
