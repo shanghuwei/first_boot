@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
+import java.util.Date;
 
 @Entity
 @Data
@@ -19,5 +21,8 @@ public class Girl {
     private String heightWeight;
     private String hairColor;
     private boolean open;
+    private Date createTime;
+    @Transient
+    private String xueXing;
 
 }

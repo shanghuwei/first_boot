@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,8 @@ public class GirlController {
 
     @PostMapping("/girl_add")
     public Girl girlAdd(@RequestBody Girl girl) {
-
+        girl.setCreateTime(new Date());
+        girl.setXueXing("o");
         return girlRepository.save(girl);
     }
 
@@ -46,7 +48,6 @@ public class GirlController {
         para.put("age",girl.getAge());
         para.put("cupSize" ,girl.getCupSize());
         String sql = "update dbgirl.girl SET age=:age,cup_size=:cupSize WHERE id=:id";
-
         jdbcTemplate.update(sql,para);
         return girl;
     }
@@ -54,6 +55,7 @@ public class GirlController {
     @DeleteMapping("/deleteGirl/{id}")
     public String deleteGirl(@PathVariable Integer id) {
         girlRepository.delete(id);
+
         return "delete success id = " + id;
     }
 
