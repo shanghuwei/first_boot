@@ -24,10 +24,15 @@ public class GirlController {
     @Autowired
     NamedParameterJdbcTemplate jdbcTemplate;
 
+    @Autowired
+    Girl girl;
+
     @PostMapping("/girl_add")
     public Girl girlAdd(@RequestBody Girl girl) {
         girl.setCreateTime(new Date());
         girl.setXueXing("o");
+        System.out.println("toString:"+girl.toString());
+        girl.toString();
         return girlRepository.save(girl);
     }
 
@@ -67,6 +72,11 @@ public class GirlController {
     @GetMapping("/insertGirls")
     public void insertGirls() {
         girlSevice.InsertTwo();
+    }
+
+    @GetMapping("/fuctionTest")
+    public  Girl functionTest(){
+        return  girl;
     }
 
 }

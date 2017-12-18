@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface GirlRepository extends JpaRepository<Girl,Integer>{
      List<Girl> findGirlsByAge(Integer age);
+
 }
