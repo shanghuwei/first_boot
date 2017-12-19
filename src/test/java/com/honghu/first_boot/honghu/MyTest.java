@@ -1,6 +1,7 @@
 package com.honghu.first_boot.honghu;
 
 import com.honghu.first_boot.BaseTest;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
@@ -59,6 +60,28 @@ public class MyTest extends BaseTest{
         object.put("name","teacher1");
         object.put("title","特级");
         mockMvc.perform(post("/insert/teacher").content(object.toString()).header("Content-Type","application/json"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void insertOrder() throws Exception{
+
+        JSONObject item = new JSONObject();
+        item.put("price",10);
+        item.put("qty",5);
+        JSONObject item1 = new JSONObject();
+        item1.put("price",20);
+        item1.put("qty",2);
+
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.put(item);
+        jsonArray.put(item1);
+
+        JSONObject object = new JSONObject();
+        object.put("amount",90.00);
+        object.put("itemList",jsonArray);
+        mockMvc.perform(post("/insert/order").content(object.toString()).header("Content-Type","application/json"))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
