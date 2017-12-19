@@ -80,7 +80,8 @@ public class MyTest extends BaseTest{
 
         JSONObject object = new JSONObject();
         object.put("amount",90.00);
-        object.put("itemList",jsonArray);
+        object.put("orderItems",jsonArray);
+
         mockMvc.perform(post("/insert/order").content(object.toString()).header("Content-Type","application/json"))
                 .andDo(print())
                 .andExpect(status().isOk());

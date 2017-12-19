@@ -7,15 +7,18 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity
-@Data
+@Entity(name = "orders")
 @NoArgsConstructor
+@Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Order {
     @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Integer id;
     private Double amount;
-//    @OneToMany( orphanRemoval = true,cascade = {CascadeType.ALL})
-//    @JoinColumn(name = "orderId")
-//    private List<OrderItem> itemList;
+    @OneToMany(orphanRemoval = true,cascade = CascadeType.ALL)
+    @JoinColumn(name = "orderId")
+    private List<OrderItem> orderItems;
 }
+
+
