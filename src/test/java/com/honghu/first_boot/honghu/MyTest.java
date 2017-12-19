@@ -33,4 +33,33 @@ public class MyTest extends BaseTest{
                 .andDo(print())
                 .andExpect(status().isOk());
     }
+
+    @Test
+    public void insertPerson() throws Exception{
+        JSONObject object = new JSONObject();
+        object.put("name","honghu");
+        mockMvc.perform(post("/insert/person").content(object.toString()).header("Content-Type","application/json"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void insertStudent() throws Exception{
+        JSONObject object = new JSONObject();
+        object.put("name","student1");
+        object.put("score",100);
+        mockMvc.perform(post("/insert/student").content(object.toString()).header("Content-Type","application/json"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void insertTeacher() throws Exception{
+        JSONObject object = new JSONObject();
+        object.put("name","teacher1");
+        object.put("title","特级");
+        mockMvc.perform(post("/insert/teacher").content(object.toString()).header("Content-Type","application/json"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
 }
