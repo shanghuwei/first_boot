@@ -17,7 +17,8 @@ public class Order {
     private Integer id;
     private Double amount;
     @OneToMany(orphanRemoval = true,cascade = CascadeType.ALL)
-    @JoinColumn(name = "orderId")
+//    @JoinColumn(name = "orderId")
+    @JoinTable(name = "orders_orderItem")
     private List<OrderItem> orderItems;
 }
 
