@@ -9,6 +9,7 @@
     <!--<packaging>war</packaging>-->
     <packaging>jar</packaging>
 
+
     <name>first_boot</name>
     <description>Demo project for Spring Boot</description>
 
